@@ -26,30 +26,30 @@ jobs:
         service_account_key: ${{ secrets.GKE_SA_KEY }}
   
      - name: Authenticate
-       uses: gcloud --quiet auth configure-docker
+       run: gcloud --quiet auth configure-docker
 
      - name: Get credentials
-       uses: gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE
+       run: gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE
 
      - name: Create first image and push it to a registry
-       uses: |
+       run: |
         echo "IMAGE_ONE_WITH_TAG=gcr.io/$PROJECT_ID/$IMAGE_ONE:${GITHUB_REF#refs/heads/}-GITHUB_SHA" >> $GITHUB_ENV
         docker build -t $IMAGE_ONE_WITH_TAG .
         docker push $IMAGE_ONE_WITH_TAG
       
      - name: Create second image and push it to a registry
-       uses: |
+       run: |
         echo "IMAGE_TWO_WITH_TAG=gcr.io/$PROJECT_ID/$IMAGE_TWO:${GITHUB_REF#refs/heads/}-GITHUB_SHA" >> $GITHUB_ENV"
         docker build -t $IMAGE_TWO_WITH_TAG ./main2/
         docker push $IMAGE_TWO_WITH_TAG
       
      - name: Setup Kustomize
-       uses: |
+       run: |
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
     
      - name: Deploy on GKE
-       uses: |
+       run: |
         cd deploy
         kubectl create namespace ${GITHUB_REF#refs/heads/} || true
         kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
