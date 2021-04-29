@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: main-app-ingress
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: volume-svc
+              servicePort: 3004
+          - path: /api/get
+            backend:
+              serviceName: main-app-svc
+              servicePort: 2345
+          - path: /api/ping
+            backend:
+              serviceName: ping-svc
+              servicePort: 3003

@@ -1,0 +1,4 @@
+node_modules/**
+main2/node_modules/**
+
+*package-lock.json

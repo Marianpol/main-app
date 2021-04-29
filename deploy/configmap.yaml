@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ping-config
+data:
+  message: "Hello Marian from K8s"
+
