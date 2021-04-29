@@ -26,7 +26,7 @@ jobs:
          service_account_key: ${{ secrets.GKE_SA_KEY }}
   
      - name: Authentication
-       uses: gcloud --quite auth configure-docker
+       uses: gcloud --quiet auth configure-docker
 
      - name: Get credentials
        uses: gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE
