@@ -7,4 +7,6 @@ resources:
  - ./ingress.yaml
  - ./persistentvolume.yaml
  - ./persistentvolumeclaim.yaml
-namespace: production
+images:
+  - name: MAIN-ONE-IMAGE
+  - name: MAIN-TWO-IMAGE
