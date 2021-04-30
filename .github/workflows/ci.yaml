@@ -33,13 +33,13 @@ jobs:
 
      - name: Create first image and push it to a registry
        run: |-
-        echo "IMAGE_ONE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT_ID }}/$IMAGE_ONE:${GITHUB_REF#refs/heads/}-GITHUB_SHA" >> $GITHUB_ENV
+        echo "IMAGE_ONE_WITH_TAG=gcr.io/$PROJECT_ID/$IMAGE_ONE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
         docker build -t "$IMAGE_ONE_WITH_TAG" .
         docker push "$IMAGE_ONE_WITH_TAG"
       
      - name: Create second image and push it to a registry
        run: |-
-        echo "IMAGE_TWO_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT_ID }}/$IMAGE_TWO:${GITHUB_REF#refs/heads/}-GITHUB_SHA" >> $GITHUB_ENV"
+        echo "IMAGE_TWO_WITH_TAG=gcr.io/$PROJECT_ID/$IMAGE_TWO:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV"
         docker build -t "$IMAGE_TWO_WITH_TAG"./main2/
         docker push "$IMAGE_TWO_WITH_TAG"
       
