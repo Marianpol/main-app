@@ -40,7 +40,7 @@ jobs:
       
      - name: Create second image and push it to a registry
        run: |-
-        echo "IMAGE_TWO_WITH_TAG=gcr.io/$PROJECT_ID/$IMAGE_TWO:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV"
+        echo "IMAGE_TWO_WITH_TAG=gcr.io/$PROJECT_ID/$IMAGE_TWO:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
         docker build -t "$IMAGE_TWO_WITH_TAG"./main2/
         docker push "$IMAGE_TWO_WITH_TAG"
       
